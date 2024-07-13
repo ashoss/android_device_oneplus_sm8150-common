@@ -4,6 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Add common definitions for Qualcomm
+$(call inherit-product, hardware/qcom-caf/common/common.mk)
+
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -30,6 +33,7 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    acdbdata_adsp_avs_config.bin_symlink \
     android.hardware.audio.service \
     android.hardware.audio@4.0.vendor \
     android.hardware.audio@6.0-impl \
@@ -104,6 +108,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service_64 \
     libcamera_metadata_shim \
+    libutilscallstack.vendor:64 \
     libxml2 \
     vendor.qti.hardware.camera.device@1.0.vendor
 
@@ -329,8 +334,11 @@ PRODUCT_COPY_FILES += \
 
 # QMI
 PRODUCT_PACKAGES += \
+    libcurl.vendor:64 \
     libjson \
-    libqti_vndfwk_detect.vendor
+    libjsoncpp.vendor \
+    libqti_vndfwk_detect.vendor \
+    libsqlite.vendor:64 \
 
 # RIL
 PRODUCT_PACKAGES += \
@@ -353,6 +361,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.oplus_als.service \
     android.hardware.sensors@2.0-service.oneplus_msmnile \
+    libdumpstateutil.vendor:64 \
     libsensorndkbridge \
     sensors.oplus
 
@@ -458,10 +467,17 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml
 
+# WiFi firmware symlinks
+PRODUCT_PACKAGES += \
+    firmware_wlan_mac.bin_symlink \
+    firmware_WCNSS_qcom_cfg.ini_symlink
+
 # WiFi Display
 PRODUCT_PACKAGES += \
     android.media.audio.common.types-V2-cpp \
     libnl \
+    libpng.vendor:32 \
+    libprocessgroup.vendor:32 \
     libwfdaac_vendor
 
 PRODUCT_BOOT_JARS += \
